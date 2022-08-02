@@ -1,0 +1,36 @@
+{
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/MariachiBear/cutting-ninja-cli/issues"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "clipboard-listener": "^0.2.3",
+    "clipboardy": "^3.0.0",
+    "url-regex": "^5.0.0"
+  },
+  "description": "",
+  "devDependencies": {
+    "eslint": "8.20.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-node": "4.1.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-prettier": "4.2.1",
+    "prettier": "2.7.1"
+  },
+  "homepage": "https://github.com/MariachiBear/cutting-ninja-cli#readme",
+  "keywords": [],
+  "license": "MIT",
+  "main": "./src/main.js",
+  "name": "cutting-ninja-cli",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MariachiBear/cutting-ninja-cli.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "version": "1.0.0"
+}
