@@ -20,6 +20,7 @@
     "no-console": "off",
     "no-plusplus": "off",
     "no-process-exit": "off",
+    "no-underscore-dangle": "off",
     "no-unused-vars": "warn",
     "prettier/prettier": "error"
   }

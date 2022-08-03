@@ -1,24 +1,32 @@
-import axios from 'axios';
+import { exec } from 'child_process';
+import { program } from 'commander';
 
-/**
- * @description
- * @param {string} copyValue
- * @return {string}
- */
-export const apiPost = async (copyValue) => {
-  const response = axios
-    .post('https://nnjct.pw/urls', { longUrl: copyValue })
-    .then((resp) => {
-      console.log(resp.data);
-      const { shortUrl } = resp.data;
-      return `https://nnjct.pw/${shortUrl}`;
-    })
-    .catch((error) => {
-      console.log(error);
-      return copyValue;
-    });
+export const init = () =>
+  exec('npx pm2 start src/listener.js', (err, output) => {
+    if (err) {
+      program.error('could not execute command: ', err);
+    }
+    // log the output received from the command
+    console.log('Output: \n', output);
+    process.exit();
+  });
 
-  return response;
-};
+export const info = () =>
+  exec('npx pm2 l', (err, output) => {
+    if (err) {
+      program.error('could not execute command: ', err);
+    }
+    // log the output received from the command
+    console.log('Output: \n', output);
+    process.exit();
+  });
 
-export const haha = '';
+export const stop = () =>
+  exec('npx pm2 stop all && npx pm2 delete all', (err, output) => {
+    if (err) {
+      program.error('could not execute command: ', err);
+    }
+    // log the output received from the command
+    console.log('Output: \n', output);
+    process.exit();
+  });
