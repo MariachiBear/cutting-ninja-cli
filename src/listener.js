@@ -8,7 +8,7 @@ const listener = new ClipboardListener();
  * @description Defines what to do when there is a change in the clipboard contents.
  * @param {string} value Clipboard copied value
  */
-const listenerOnChange = async (value) => {
+const listenerOnChange = async (value = '') => {
   const isUrl = urlRegex({ exact: true }).test(value);
   const isFromAPI = value.includes('https://nnjct.pw');
 
