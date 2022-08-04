@@ -1,19 +1,20 @@
 {
   "author": "",
+  "bin": {
+    "nnjct": "./src/main.js"
+  },
   "bugs": {
     "url": "https://github.com/MariachiBear/cutting-ninja-cli/issues"
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "chalk": "^5.0.1",
     "clipboard-listener": "^0.2.3",
     "clipboardy": "^3.0.0",
     "commander": "^9.4.0",
     "forever": "^4.0.3",
     "pm2": "^5.2.0",
     "url-regex": "^5.0.0"
-  },
-  "bin": {
-    "nnjct": "./src/main.js"
   },
   "description": "",
   "devDependencies": {
@@ -24,6 +25,9 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "4.2.1",
     "prettier": "2.7.1"
+  },
+  "engines": {
+    "node": ">=8.3.0"
   },
   "homepage": "https://github.com/MariachiBear/cutting-ninja-cli#readme",
   "keywords": [],
