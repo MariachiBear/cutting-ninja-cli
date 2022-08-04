@@ -50,6 +50,9 @@
     "type": "git",
     "url": "git+https://github.com/MariachiBear/cutting-ninja-cli.git"
   },
+  "scripts": {
+    "postinstall": "node ./src/postintall.js"
+  },
   "type": "module",
-  "version": "0.0.14"
+  "version": "0.1.0"
 }
