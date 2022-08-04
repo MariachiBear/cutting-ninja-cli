@@ -19,10 +19,16 @@ const axiosInstance = axios.create({
   },
 });
 
-if (fs.existsSync(tokenFilePath)) {
-  const token = fs.readFileSync(tokenFilePath, 'utf8');
-  axiosInstance.defaults.headers.common.Authorization = token;
-}
+const setToken = () => {
+  const tokenFileExists = fs.existsSync(tokenFilePath);
+  const userFileExists = fs.existsSync(userFilePath);
+  if (tokenFileExists && userFileExists) {
+    const token = fs.readFileSync(tokenFilePath, 'utf8');
+    axiosInstance.defaults.headers.common.Authorization = token;
+  } else {
+    axiosInstance.defaults.headers.common.Authorization = '';
+  }
+};
 
 /**
  * @description
@@ -30,6 +36,7 @@ if (fs.existsSync(tokenFilePath)) {
  * @return {Promise<string>}
  */
 export const shortThisUrl = async (copyValue) => {
+  setToken();
   const response = axiosInstance
     .post('/urls', { longUrl: copyValue })
     .then((resp) => {
@@ -51,6 +58,7 @@ export const shortThisUrl = async (copyValue) => {
  * @return {Promise<true | number>}
  */
 export const logIn = async (email, password) => {
+  setToken();
   const response = axiosInstance
     .post('/users/sign-in', { email, password })
     .then((resp) => {
@@ -85,14 +93,20 @@ export const logout = () => {
       return;
     }
     axiosInstance.defaults.headers.common.Authorization = '';
-    consoleSuccess('Disconnected successfully');
   });
+  consoleSuccess('Disconnected successfully');
 };
 
 export const loginStatus = () => {
-  const userString = fs.readFileSync(userFilePath, 'utf8');
-  const userJson = JSON.parse(userString);
-  Object.keys(userJson).forEach((key) => {
-    consoleInfo(`${key} = ${userJson[key]}`);
-  });
+  const tokenFileExists = fs.existsSync(tokenFilePath);
+  const userFileExists = fs.existsSync(userFilePath);
+  if (tokenFileExists && userFileExists) {
+    const userString = fs.readFileSync(userFilePath, 'utf8');
+    const userJson = JSON.parse(userString);
+    Object.keys(userJson).forEach((key) => {
+      consoleInfo(`${key} = ${userJson[key]}`);
+    });
+  } else {
+    consoleInfo('You are currently disconnected');
+  }
 };
