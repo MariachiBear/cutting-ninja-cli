@@ -22,7 +22,6 @@ jobs:
 
       - name: Publish NPMJS
         run: npm publish --access public
-        working-directory: ./dist
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
@@ -34,6 +33,5 @@ jobs:
 
       - name: Publish GitHub
         run: npm publish --access public
-        working-directory: ./dist
         env:
           NODE_AUTH_TOKEN: ${{secrets.DOCKER_HUB_ACCESS_TOKEN}}
