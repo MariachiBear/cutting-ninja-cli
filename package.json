@@ -13,6 +13,7 @@
     "clipboard-listener": "^0.2.3",
     "clipboardy": "^3.0.0",
     "commander": "^9.4.0",
+    "node-notifier": "^10.0.1",
     "ospath": "^1.2.2",
     "pm2": "^5.2.0",
     "re2": "^1.17.7",

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { program } from 'commander';
 import { logIn, loginStatus, logout } from './apiFunctions.js';
-import { getPackage, info, init, stop } from './functions.js';
+import { disable, enable, getPackage, info, init, stop } from './functions.js';
 
 program
   .name('nnjct')
@@ -32,13 +32,23 @@ program
 
 program
   .command('info')
-  .description("Get information about the listener to short your URL's ")
+  .description("Get information about the listener that short your URL's ")
   .action(info);
 
 program
   .command('stop')
-  .description("Stop the listener to short your URL's ")
+  .description("Stop the listener that short your URL's ")
   .action(stop);
+
+program
+  .command('enable')
+  .description('Show configuration to enable the listener on system startup')
+  .action(enable);
+
+program
+  .command('disable')
+  .description('Show configuration to disable the listener from system startup')
+  .action(disable);
 
 try {
   program.parse(process.argv);

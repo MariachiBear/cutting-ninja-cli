@@ -68,3 +68,23 @@ export const stop = () =>
       process.exit();
     }
   );
+
+/**
+ * @description Runs PM2 startup command.
+ */
+export const enable = () =>
+  exec('npx pm2 startup', (err, stdout) => {
+    if (err) consoleInfo(stdout);
+    else consoleSuccess('Clipboard listener enabled');
+    process.exit();
+  });
+
+/**
+ * @description Runs PM2 unstartup command.
+ */
+export const disable = () =>
+  exec('npx pm2 unstartup', (err, stdout) => {
+    if (err) consoleInfo(stdout);
+    else consoleSuccess('Clipboard listener enabled');
+    process.exit();
+  });
