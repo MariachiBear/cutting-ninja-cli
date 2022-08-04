@@ -33,13 +33,9 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Change directory
-        run: cd ./dist
-
       - name: Publish
-        run: |
-          ls -lah
-          npm publish --access public
+        run: npm publish --access public
+        working-directory: ./dist
         env:
           NODE_AUTH_TOKEN: ${{secrets.DOCKER_HUB_ACCESS_TOKEN}}
 
@@ -71,12 +67,8 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Change directory
-        run: cd ./dist
-
       - name: Publish
-        run: |
-          ls -lah
-          npm publish --access public
+        run: npm publish --access public
+        working-directory: ./dist
         env:
           NODE_AUTH_TOKEN: ${{secrets.DOCKER_HUB_ACCESS_TOKEN}}
