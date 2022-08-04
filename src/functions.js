@@ -1,5 +1,6 @@
 import { exec } from 'child_process';
 import fs from 'fs';
+import ospath from 'ospath';
 import path from 'path';
 import {
   consoleError,
@@ -7,6 +8,15 @@ import {
   consoleSuccess,
   __dirname,
 } from './utils.js';
+
+const listenerConfig = {
+  name: 'ClipboardListener',
+  script: './src/listener.js',
+  error_file: `${ospath.home()}/.nnjct/logs/XXXerr.log`,
+  out_file: `${ospath.home()}/.nnjct/logs/XXXout.log`,
+  pid_file: `${ospath.home()}/.nnjct/pid/app-pm_id.pid`,
+};
+
 /**
  * @description Get the information from the package.json file.
  * @param {String} key The package.json key to retrieve
@@ -23,24 +33,26 @@ export const getPackage = (key) => {
 /**
  * @description Start the listener process using PM2.
  */
-export const init = () =>
-  exec('npx pm2 start src/listener.js', (err) => {
-    if (err) {
-      consoleError('could not execute command: ', err);
-    }
-    consoleSuccess('Clipboard listener started successfully');
+export const init = () => {
+  fs.writeFileSync(
+    path.join(__dirname, '..', 'pm2.json'),
+    JSON.stringify(listenerConfig)
+  );
+
+  exec('npx pm2 start pm2.json && npx pm2 save --force', (err) => {
+    if (err) consoleError('There was an error starting the listener');
+    else consoleSuccess('Clipboard listener started successfully');
     process.exit();
   });
+};
 
 /**
  * @description Get the PM2 information for the listener.
  */
 export const info = () =>
-  exec('npx pm2 l', (err, output) => {
-    if (err) {
-      consoleError('could not execute command: ', err);
-    }
-    consoleInfo(output);
+  exec('npx pm2 l ClipboardListener', (err, output) => {
+    if (err) consoleError('Clipboard Listener is not currently running');
+    else consoleInfo(output);
     process.exit();
   });
 
@@ -48,10 +60,11 @@ export const info = () =>
  * @description Stops and deletes all listeners running.
  */
 export const stop = () =>
-  exec('npx pm2 stop all && npx pm2 delete all', (err) => {
-    if (err) {
-      consoleError('could not execute command: ', err);
+  exec(
+    'npx pm2 stop ClipboardListener && npx pm2 delete ClipboardListener && npx pm2 save --force',
+    (err) => {
+      if (err) consoleError('Clipboard Listener is not currently running');
+      else consoleSuccess('Clipboard listener stopped successfully');
+      process.exit();
     }
-    consoleSuccess('Clipboard listener stopped successfully');
-    process.exit();
-  });
+  );
