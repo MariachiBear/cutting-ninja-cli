@@ -17,18 +17,10 @@ jobs:
         with:
           node-version: 16
           registry-url: 'https://registry.npmjs.org'
-
-      - name: Cache dependencies
-        id: cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: npm-${{ hashFiles('package-lock.json') }}
-          restore-keys: npm-
+          cache: 'npm'
 
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm install
+        run: npm ci
 
       - name: Build
         run: npm run build
@@ -51,18 +43,10 @@ jobs:
         with:
           node-version: 16
           registry-url: 'https://npm.pkg.github.com'
-
-      - name: Cache dependencies
-        id: cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: npm-${{ hashFiles('package-lock.json') }}
-          restore-keys: npm-
+          cache: 'npm'
 
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm install
+        run: npm ci
 
       - name: Build
         run: npm run build
