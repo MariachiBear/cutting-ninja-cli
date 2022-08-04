@@ -10,13 +10,14 @@ program
 
 program
   .command('login')
-  .argument('[email]', 'Your user email address.')
-  .argument('[password]', 'Your user password.')
   .option('-i, --info', 'Show your login information')
+  .option('-e, --email <email>', 'Set login email')
+  .option('-p, --password <password>', 'Set login password')
   .description("Login into the system to save the generated URL's as yours")
-  .action(async (email, password, options) => {
-    if (options.info) loginStatus();
-    else logIn(email, password);
+  .action(async (options) => {
+    if (Object.keys(options).length === 0) program.outputHelp();
+    else if (options.info) loginStatus();
+    else logIn(options.email, options.password);
   });
 
 program

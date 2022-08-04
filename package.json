@@ -1,5 +1,5 @@
 {
-  "author": "",
+  "author": "Rubén Conde <code@rubn.dev>",
   "bin": {
     "nnjct": "./src/main.js"
   },
@@ -34,14 +34,14 @@
   "keywords": [],
   "license": "MIT",
   "main": "./src/main.js",
-  "name": "cutting-ninja-cli",
+  "name": "@mariachibear/cutting-ninja-cli",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MariachiBear/cutting-ninja-cli.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "publish": "npm publish --access public"
   },
   "type": "module",
-  "version": "1.0.0"
+  "version": "0.0.2"
 }
