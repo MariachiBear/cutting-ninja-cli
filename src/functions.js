@@ -7,16 +7,22 @@ import {
   consoleSuccess,
   __dirname,
 } from './utils.js';
-
-export const getPackage = () => {
+/**
+ * @description Get the information from the package.json file.
+ * @param {String} key The package.json key to retrieve
+ * @return {Object} The package.json file as a JSON object
+ */
+export const getPackage = (key) => {
   const packageString = fs.readFileSync(
     path.join(__dirname, '..', 'package.json')
   );
   const packageJson = JSON.parse(packageString);
-
-  return packageJson;
+  return packageJson[key];
 };
 
+/**
+ * @description Start the listener process using PM2.
+ */
 export const init = () =>
   exec('npx pm2 start src/listener.js', (err) => {
     if (err) {
@@ -26,6 +32,9 @@ export const init = () =>
     process.exit();
   });
 
+/**
+ * @description Get the PM2 information for the listener.
+ */
 export const info = () =>
   exec('npx pm2 l', (err, output) => {
     if (err) {
@@ -35,6 +44,9 @@ export const info = () =>
     process.exit();
   });
 
+/**
+ * @description Stops and deletes all listeners running.
+ */
 export const stop = () =>
   exec('npx pm2 stop all && npx pm2 delete all', (err) => {
     if (err) {

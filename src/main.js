@@ -5,7 +5,7 @@ import { getPackage, info, init, stop } from './functions.js';
 
 program
   .name('nnjct')
-  .version(getPackage().version)
+  .version(getPackage('version'))
   .description("Cutting Ninja CLI to short your URL's as you copy them");
 
 program

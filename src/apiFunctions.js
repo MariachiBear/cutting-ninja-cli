@@ -18,7 +18,9 @@ const axiosInstance = axios.create({
     'Content-Type': 'application/json',
   },
 });
-
+/**
+ * @description Set the current Authorization token depending on the login information.
+ */
 const setToken = () => {
   const tokenFileExists = fs.existsSync(tokenFilePath);
   const userFileExists = fs.existsSync(userFilePath);
@@ -31,8 +33,8 @@ const setToken = () => {
 };
 
 /**
- * @description
- * @param {string} copyValue
+ * @description Send the detected URL to short it with Cutting Ninja.
+ * @param {string} copyValue URL copied from the clipboard
  * @return {Promise<string>}
  */
 export const shortThisUrl = async (copyValue) => {
@@ -52,9 +54,9 @@ export const shortThisUrl = async (copyValue) => {
 };
 
 /**
- * @description
- * @param {string} email
- * @param {string} password
+ * @description Let log in the user to save the shorted URS into their account.
+ * @param {string} email User's email
+ * @param {string} password User's password
  * @return {Promise<true | number>}
  */
 export const logIn = async (email, password) => {
@@ -84,17 +86,17 @@ export const logIn = async (email, password) => {
   return response;
 };
 
+/**
+ * @description Logs the user out by deleting their local files
+ */
 export const logout = () => {
-  fs.rmSync(userFilePath, { recursive: true });
-  fs.rm(tokenFilePath, { recursive: true }, (err) => {
-    if (err) {
-      // File deletion failed
-      console.error(err.message);
-      return;
-    }
-    axiosInstance.defaults.headers.common.Authorization = '';
-  });
-  consoleSuccess('Disconnected successfully');
+  try {
+    fs.rmSync(userFilePath, { recursive: true });
+    fs.rmSync(tokenFilePath, { recursive: true });
+    consoleSuccess('Disconnected successfully');
+  } catch (error) {
+    consoleSuccess(error);
+  }
 };
 
 export const loginStatus = () => {

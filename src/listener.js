@@ -3,11 +3,11 @@ import clipboard from 'clipboardy';
 import urlRegex from 'url-regex-safe';
 import { shortThisUrl } from './apiFunctions.js';
 
-/*
- * Create a new instance
- */
 const listener = new ClipboardListener();
-
+/**
+ * @description Defines what to do when there is a change in the clipboard contents.
+ * @param {string} value Clipboard copied value
+ */
 const listenerOnChange = async (value) => {
   const isUrl = urlRegex({ exact: true }).test(value);
   const isFromAPI = value.includes('https://nnjct.pw');
