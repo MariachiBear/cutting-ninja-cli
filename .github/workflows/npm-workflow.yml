@@ -18,14 +18,25 @@ jobs:
           node-version: 16
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Cache node modules
-        uses: c-hive/gha-npm-cache@v1
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-
 
       - name: Install dependencies
-        run: npm install
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci --ignore-scripts
 
       - name: Build
         run: npm run build
+
+      - name: Change directory
+        run: |
+          ls -lah
+          cd ./dist
 
       - name: Publish
         run: npm run publish
@@ -45,14 +56,25 @@ jobs:
           node-version: 16
           registry-url: 'https://npm.pkg.github.com'
 
-      - name: Cache node modules
-        uses: c-hive/gha-npm-cache@v1
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-
 
       - name: Install dependencies
-        run: npm install
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci --ignore-scripts
 
       - name: Build
         run: npm run build
+
+      - name: Change directory
+        run: |
+          ls -lah
+          cd ./dist
 
       - name: Publish
         run: npm run publish

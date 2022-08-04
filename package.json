@@ -54,7 +54,7 @@
     "url": "git+https://github.com/MariachiBear/cutting-ninja-cli.git"
   },
   "scripts": {
-    "publish": "cd ./dist && npm publish --access public",
+    "publish": "npm publish --access public",
     "prebuild": "uglifyjs-folder src -x .js false -eo ./dist/src",
     "build": "packito -d ./dist"
   },
