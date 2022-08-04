@@ -34,7 +34,7 @@ export const getPackage = (key) => {
  * @description Start the listener process using PM2.
  */
 export const init = () => {
-  const pm2ConfigFilePath = path.join(ospath.home(), '.nnjct', 'pm2.config');
+  const pm2ConfigFilePath = path.join(ospath.home(), '.nnjct', 'pm2.json');
 
   fs.writeFileSync(pm2ConfigFilePath, JSON.stringify(listenerConfig));
 
