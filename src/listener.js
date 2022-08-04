@@ -1,6 +1,6 @@
 import ClipboardListener from 'clipboard-listener';
 import clipboard from 'clipboardy';
-import urlRegex from 'url-regex';
+import urlRegex from 'url-regex-safe';
 import { shortThisUrl } from './apiFunctions.js';
 
 /*
