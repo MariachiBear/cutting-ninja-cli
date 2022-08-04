@@ -35,3 +35,9 @@ jobs:
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.DOCKER_HUB_ACCESS_TOKEN}}
+
+  develop-branch:
+    needs: [publish]
+    uses: ./.github/workflows/rebase_to_master.yml
+    with:
+      branch_name: 'develop'
