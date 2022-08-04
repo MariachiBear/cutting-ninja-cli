@@ -11,7 +11,7 @@ import {
 
 const listenerConfig = {
   name: 'ClipboardListener',
-  script: './src/listener.js',
+  script: `${__dirname}/listener.js`,
   error_file: `${ospath.home()}/.nnjct/logs/XXXerr.log`,
   out_file: `${ospath.home()}/.nnjct/logs/XXXout.log`,
   pid_file: `${ospath.home()}/.nnjct/pid/app-pm_id.pid`,
@@ -36,7 +36,8 @@ export const getPackage = (key) => {
 export const init = () => {
   const pm2ConfigFilePath = path.join(ospath.home(), '.nnjct', 'pm2.json');
 
-  fs.writeFileSync(pm2ConfigFilePath, JSON.stringify(listenerConfig));
+  if (!fs.existsSync(pm2ConfigFilePath))
+    fs.writeFileSync(pm2ConfigFilePath, JSON.stringify(listenerConfig));
 
   exec(`npx pm2 start ${pm2ConfigFilePath} && npx pm2 save --force`, (err) => {
     if (err) consoleError('There was an error starting the listener');
