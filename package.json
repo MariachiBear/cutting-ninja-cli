@@ -1,0 +1,63 @@
+{
+  "author": "Rubén Conde <code@rubn.dev>",
+  "bin": {
+    "nnjct": "./src/main.js"
+  },
+  "bugs": {
+    "url": "https://github.com/MariachiBear/cutting-ninja-cli/issues",
+    "email": "support.cuttingninja@mariachibear.com"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "chalk": "^5.0.1",
+    "clipboard-listener": "^0.2.3",
+    "clipboardy": "^3.0.0",
+    "commander": "^9.4.0",
+    "node-notifier": "^10.0.1",
+    "ospath": "^1.2.2",
+    "pm2": "^5.2.0",
+    "re2": "^1.17.7",
+    "url-regex-safe": "^3.0.0"
+  },
+  "description": "Cutting Ninja CLI permitting to short URL's by copying them",
+  "devDependencies": {
+    "@types/url-regex-safe": "^1.0.0",
+    "eslint": "8.20.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-node": "4.1.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-prettier": "4.2.1",
+    "ncp": "^2.0.0",
+    "packito": "^0.5.0",
+    "prettier": "2.7.1",
+    "uglifyjs-folder": "^3.1.2"
+  },
+  "engines": {
+    "node": ">=8.3.0"
+  },
+  "homepage": "https://github.com/MariachiBear/cutting-ninja-cli#readme",
+  "keywords": [
+    "cli",
+    "url",
+    "shortener",
+    "cutting",
+    "ninja",
+    "tool",
+    "utilities"
+  ],
+  "license": "MIT",
+  "main": "./src/main.js",
+  "name": "@mariachibear/cutting-ninja-cli",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MariachiBear/cutting-ninja-cli.git"
+  },
+  "scripts": {
+    "publish": "cd ./dist && npm publish --access public",
+    "prebuild": "uglifyjs-folder src -x .js false -eo ./dist/src",
+    "build": "packito -d ./dist"
+  },
+  "type": "module",
+  "version": "0.0.5"
+}
