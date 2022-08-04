@@ -34,12 +34,11 @@ export const getPackage = (key) => {
  * @description Start the listener process using PM2.
  */
 export const init = () => {
-  fs.writeFileSync(
-    path.join(__dirname, '..', 'pm2.json'),
-    JSON.stringify(listenerConfig)
-  );
+  const pm2ConfigFilePath = path.join(ospath.home(), '.nnjct', 'pm2.config');
 
-  exec('npx pm2 start pm2.json && npx pm2 save --force', (err) => {
+  fs.writeFileSync(pm2ConfigFilePath, JSON.stringify(listenerConfig));
+
+  exec(`npx pm2 start ${pm2ConfigFilePath} && npx pm2 save --force`, (err) => {
     if (err) consoleError('There was an error starting the listener');
     else consoleSuccess('Clipboard listener started successfully');
     process.exit();

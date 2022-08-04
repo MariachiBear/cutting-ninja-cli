@@ -1,15 +1,12 @@
 import axios from 'axios';
 import fs from 'fs';
+import ospath from 'ospath';
 import path from 'path';
-import {
-  consoleError,
-  consoleInfo,
-  consoleSuccess,
-  __dirname,
-} from './utils.js';
 
-const tokenFilePath = path.join(__dirname, '..', '.at');
-const userFilePath = path.join(__dirname, '..', '.user');
+import { consoleError, consoleInfo, consoleSuccess } from './utils.js';
+
+const tokenFilePath = path.join(ospath.home(), '.nnjct', '.at');
+const userFilePath = path.join(ospath.home(), '.nnjct', '.user');
 
 const axiosInstance = axios.create({
   baseURL: 'https://nnjct.pw',
