@@ -1,4 +1,4 @@
-name: NPM Workflow
+name: NPM Publish
 
 on:
   release:
