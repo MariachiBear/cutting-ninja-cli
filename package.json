@@ -28,10 +28,7 @@
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "4.2.1",
-    "ncp": "^2.0.0",
-    "packito": "^0.5.0",
-    "prettier": "2.7.1",
-    "uglifyjs-folder": "^3.1.2"
+    "prettier": "2.7.1"
   },
   "engines": {
     "node": ">=8.3.0"
@@ -53,10 +50,6 @@
     "type": "git",
     "url": "git+https://github.com/MariachiBear/cutting-ninja-cli.git"
   },
-  "scripts": {
-    "prebuild": "uglifyjs-folder src -x .js false -eo ./dist/src",
-    "build": "packito -d ./dist"
-  },
   "type": "module",
-  "version": "0.0.11"
+  "version": "0.0.12"
 }
