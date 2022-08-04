@@ -5,7 +5,7 @@ on:
     types: [published]
 
 jobs:
-  publish_npm:
+  publish:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,49 +20,25 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           cache: 'npm'
 
-      - name: Install clear dependencies
-        if: steps.node.outputs.cache-hit == 'true'
-        run: npm ci
-
       - name: Install dependencies
-        if: steps.node.outputs.cache-hit == 'false'
         run: npm install
 
       - name: Build
         run: npm run build
 
-      - name: Publish
+      - name: Publish NPMJS
         run: npm publish --access public
         working-directory: ./dist
         env:
-          NODE_AUTH_TOKEN: ${{secrets.DOCKER_HUB_ACCESS_TOKEN}}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
-  publish_github:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Install Node.js
+      - name: Change Node registry
         uses: actions/setup-node@v3
         with:
           node-version: 16
           registry-url: 'https://npm.pkg.github.com'
-          cache: 'npm'
 
-      - name: Install clear dependencies
-        if: steps.node.outputs.cache-hit == 'true'
-        run: npm ci
-
-      - name: Install dependencies
-        if: steps.node.outputs.cache-hit == 'false'
-        run: npm install
-
-      - name: Build
-        run: npm run build
-
-      - name: Publish
+      - name: Publish GitHub
         run: npm publish --access public
         working-directory: ./dist
         env:
