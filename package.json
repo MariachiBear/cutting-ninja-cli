@@ -15,7 +15,7 @@
     "commander": "9.4.1",
     "node-notifier": "10.0.1",
     "ospath": "1.2.2",
-    "pm2": "5.2.0",
+    "pm2": "5.2.2",
     "re2": "1.17.7",
     "url-regex-safe": "3.0.0"
   },
