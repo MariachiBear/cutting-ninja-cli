@@ -16,7 +16,7 @@
     "node-notifier": "10.0.1",
     "ospath": "1.2.2",
     "pm2": "5.2.2",
-    "re2": "1.17.7",
+    "re2": "1.18.0",
     "url-regex-safe": "3.0.0"
   },
   "description": "Cutting Ninja CLI permitting to short URL's by copying them",
