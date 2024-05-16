@@ -9,12 +9,13 @@ import {
   __dirname,
 } from './utils.js';
 
+const cliDir = path.join(ospath.home(), '.nnjct');
 const listenerConfig = {
   name: 'ClipboardListener',
   script: `${__dirname}/listener.js`,
-  error_file: `${ospath.home()}/.nnjct/logs/XXXerr.log`,
-  out_file: `${ospath.home()}/.nnjct/logs/XXXout.log`,
-  pid_file: `${ospath.home()}/.nnjct/pid/app-pm_id.pid`,
+  error_file: `${cliDir}/logs/XXXerr.log`,
+  out_file: `${cliDir}/logs/XXXout.log`,
+  pid_file: `${cliDir}/pid/app-pm_id.pid`,
 };
 
 /**
@@ -34,7 +35,10 @@ export const getPackage = (key) => {
  * @description Start the listener process using PM2.
  */
 export const init = () => {
-  const pm2ConfigFilePath = path.join(ospath.home(), '.nnjct', 'pm2.json');
+  
+  if (!fs.existsSync(cliDir)) fs.mkdirSync(cliDir);
+
+  const pm2ConfigFilePath = path.join(cliDir, 'pm2.json');
 
   if (!fs.existsSync(pm2ConfigFilePath))
     fs.writeFileSync(pm2ConfigFilePath, JSON.stringify(listenerConfig));
