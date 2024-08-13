@@ -8,7 +8,7 @@
     "email": "support.cuttingninja@mariachibear.com"
   },
   "dependencies": {
-    "axios": "1.6.8",
+    "axios": "1.7.4",
     "chalk": "5.3.0",
     "clipboard-listener": "0.2.3",
     "clipboardy": "4.0.0",
