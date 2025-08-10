@@ -16,7 +16,7 @@ jobs:
         id: node
         uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 22
           registry-url: 'https://registry.npmjs.org'
           cache: 'npm'
 
@@ -28,7 +28,7 @@ jobs:
       - name: Change Node registry
         uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 22
           registry-url: 'https://npm.pkg.github.com'
 
       - name: Publish GitHub
