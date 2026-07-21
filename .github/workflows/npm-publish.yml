@@ -10,13 +10,13 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.4.0
 
       - name: Install Node.js
         id: node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.4.0
         with:
-          node-version: 16
+          node-version: 16.20.2
           registry-url: 'https://registry.npmjs.org'
           cache: 'npm'
 
@@ -26,9 +26,9 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
       - name: Change Node registry
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.4.0
         with:
-          node-version: 16
+          node-version: 16.20.2
           registry-url: 'https://npm.pkg.github.com'
 
       - name: Publish GitHub
